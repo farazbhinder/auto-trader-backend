@@ -1,0 +1,5 @@
+{
+  "comment": "copy this file contents into a new file default.json, (in same folder), and set values - this key/value is just a comment",
+  "mongoURI": "your mongodb conenction uri here",
+  "jwtSecret": "your jwt secret here"
+}
