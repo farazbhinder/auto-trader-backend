@@ -5,9 +5,10 @@ const jwt = require('jsonwebtoken');
 const config = require('config');
 const { check, validationResult } = require('express-validator');
 
+const auth = require('../../middleware/auth');
 const User = require('../../models/User');
 
-// @route   GET api/users
+// @route   GET api/users/register
 // @desc    Test route
 // @access  Public
 router.get('/', (req, res) => {
@@ -79,5 +80,16 @@ router.post(
     }
   }
 );
+
+// @route   DELETE api/users/delete
+// @desc    Delete user & ads
+// @access  Private
+router.delete('/delete', auth, async (req, res) => {
+  try {
+    await User.findOneAndRemove({ _id: req.user.id });
+    // @todo - remove user ads here
+    res.json({ msg: 'User deleted' });
+  } catch (err) {}
+});
 
 module.exports = router;
